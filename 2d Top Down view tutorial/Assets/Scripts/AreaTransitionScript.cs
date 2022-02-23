@@ -2,22 +2,23 @@ using UnityEngine;
 
 public class AreaTransitionScript : MonoBehaviour
 {
-    private MainCameraController camera;
+    private MainCameraController cam;
     [SerializeField] Vector2 newMinCameraBoundary;
     [SerializeField] Vector2 newMaxCameraBoundary;
-    [SerializeField] Vector2 playerOffset;
+    [SerializeField] Vector2 playerPosOffset;
+    [SerializeField] Transform exitPos;
     private void Awake()
     {
-        camera = Camera.main.GetComponent<MainCameraController>();
+        cam = Camera.main.GetComponent<MainCameraController>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Player")
         {
-            camera.minCameraBoundary = newMinCameraBoundary;
-            camera.maxCameraBoundary = newMaxCameraBoundary;
+            cam.minCameraBoundary = newMinCameraBoundary;
+            cam.maxCameraBoundary = newMaxCameraBoundary;
 
-            camera.player.position += (Vector3)playerOffset;
+            cam.player.position = exitPos.position +(Vector3)playerPosOffset;
         }
     }
 }
