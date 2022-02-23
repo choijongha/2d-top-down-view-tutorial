@@ -2,10 +2,14 @@ using UnityEngine;
 
 public class MainCameraController : MonoBehaviour
 {
-    [SerializeField] Transform player;
+    public Transform player { get; private set; }
     [SerializeField] float smoothing = 0.2f;
-    [SerializeField] Vector2 minCameraBoundary;
-    [SerializeField] Vector2 maxCameraBoundary;
+    public Vector2 minCameraBoundary;
+    public Vector2 maxCameraBoundary;
+    private void Awake()
+    {
+        player = GameObject.FindWithTag("Player").transform;
+    }
     private void FixedUpdate()
     {
         Vector3 targetPos = new Vector3(player.position.x, player.position.y, this.transform.position.z);
@@ -15,7 +19,7 @@ public class MainCameraController : MonoBehaviour
 
         transform.position = Vector3.Lerp(transform.position, targetPos, smoothing);
     }
-    /*private void LateUpdate()
+    /*private void LateUpdate() 
     {
         Vector3 targetPos = new Vector3(player.position.x, player.position.y, this.transform.position.z);
         transform.position = targetPos;
