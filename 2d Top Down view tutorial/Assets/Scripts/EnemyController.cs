@@ -31,24 +31,25 @@ public class EnemyController : MonoBehaviour
 
     private void Movement()
     {
-        if (Vector3.Distance(target.position, transform.position) <= followRange && Vector3.Distance(target.position, transform.position) >= attackRange)
+        if (Vector3.Distance(target.position, transform.position) <= followRange && Vector3.Distance(target.position, transform.position) >= attackRange && target.gameObject.activeSelf)
         {
             speed = initialSpeed;
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
             anim.SetFloat("MoveX", target.position.x - transform.position.x);
             anim.SetBool("IsMoving", true);
         }
-        else if (Vector3.Distance(target.position, transform.position) < attackRange)
+        else if (Vector3.Distance(target.position, transform.position) < attackRange && target.gameObject.activeSelf)
         {
             anim.SetBool("IsMoving", false);
+            anim.SetFloat("MoveX", target.position.x - transform.position.x);
             anim.SetTrigger("Attack");
         }
         else
         {
-            backHome();
+            BackHome();
         }                  
     }
-    private void backHome()
+    private void BackHome()
     {
         anim.SetBool("IsMoving", true);
         anim.SetFloat("MoveX", homePos.position.x - transform.position.x);
