@@ -1,10 +1,8 @@
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : Unit
 {
     [SerializeField] Transform target;
-    // 따라가는 움직임 속도.
-    [SerializeField] float speed = 3f;
     // 돌아가는 움직임 속도.
     [SerializeField] float backSpeed = 10f;
     // 공격하기 위해 따라가는 범위
@@ -20,8 +18,9 @@ public class EnemyController : MonoBehaviour
         anim = GetComponent<Animator>();
         target = FindObjectOfType<Movement>().transform;
     }
-    private void Start()
+    override protected void Start()
     {
+        base.Start();
         initialSpeed = speed;
     }
     private void Update()
@@ -61,4 +60,5 @@ public class EnemyController : MonoBehaviour
             anim.SetBool("IsMoving", false);
         }
     }
+    
 }
