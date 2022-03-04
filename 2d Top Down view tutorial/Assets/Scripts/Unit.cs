@@ -6,7 +6,7 @@ public class Unit : MonoBehaviour
 {
     // 따라가는 움직임 속도.
     [SerializeField] protected float speed = 3f;
-    [SerializeField] protected float maxHealth = 50f;
+    [SerializeField] public float maxHealth = 50f;
     [SerializeField] public float currentHealth;
     [SerializeField] public float damage = 5f;
     [SerializeField] public float damageDelay = 2f;
