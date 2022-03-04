@@ -10,32 +10,29 @@ public class Unit : MonoBehaviour
     [SerializeField] public float currentHealth;
     [SerializeField] public float damage = 5f;
     [SerializeField] public float damageDelay = 2f;
+    private float initialDamageDelay;
+    [SerializeField] protected bool isDamage = false;
     
     // Start is called before the first frame update
     virtual protected void Start()
     {
         currentHealth = maxHealth;
+        initialDamageDelay = damageDelay;
     }
-
-    // Update is called once per frame
-    void Update()
+    virtual protected void Update()
     {
-        
+        DamageDelay();
     }
-    protected void DamageDelay(float initialDelay)
+    protected void DamageDelay()
     {
-        if (OnDamage(true))
+        if (isDamage && damageDelay > 0)
         {
-            damageDelay =- Time.deltaTime;
-            if(damageDelay <= 0)
+            damageDelay -= Time.deltaTime;
+            if (damageDelay <= 0)
             {
-                OnDamage(false);
-                damageDelay = initialDelay;                
+                isDamage = false;
+                damageDelay = initialDamageDelay;
             }
         }
-    }
-    protected bool OnDamage(bool onDamage)
-    {
-        return onDamage;
     }
 }

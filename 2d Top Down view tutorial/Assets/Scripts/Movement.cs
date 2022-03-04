@@ -13,12 +13,6 @@ public class Movement : Unit
         playerRb = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
     }
-    
-    private void Update()
-    {
-        DamageDelay(damageDelay);
-        
-    }
     private void FixedUpdate()
     {
         // Rigidbody2D.velocity
@@ -43,9 +37,9 @@ public class Movement : Unit
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.collider.tag == "Enemy" && OnDamage(false))
+        if (collision.collider.tag == "Enemy" && !isDamage)
         {
-            OnDamage(true);
+            isDamage = true;
             float enemyAttack = collision.gameObject.GetComponent<EnemyController>().damage;
             currentHealth -= enemyAttack;
             
@@ -56,5 +50,5 @@ public class Movement : Unit
             }
         }
     }
-    
+
 }

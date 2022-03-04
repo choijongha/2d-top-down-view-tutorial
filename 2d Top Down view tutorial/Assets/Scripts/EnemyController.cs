@@ -23,8 +23,9 @@ public class EnemyController : Unit
         base.Start();
         initialSpeed = speed;
     }
-    private void Update()
+    override protected void Update()
     {
+        base.Update();
         Movement();
     }
 
