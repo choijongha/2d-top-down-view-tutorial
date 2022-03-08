@@ -14,8 +14,9 @@ public class EnemyController : Unit
     [SerializeField] Transform homePos;
     private Animator anim;
     private float initialSpeed;
-    private void Awake()
+    override protected void Awake()
     {
+        base.Awake();
         anim = GetComponent<Animator>();
         target = FindObjectOfType<Movement>().transform;
     }

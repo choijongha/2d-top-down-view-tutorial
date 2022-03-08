@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace AllUnits
@@ -12,11 +13,18 @@ namespace AllUnits
         [SerializeField] internal float damageDelay = 2f;
         private float initialDamageDelay;
         [SerializeField] protected bool isDamage = false;
-
+        [SerializeField] protected float damageFlashInterval = 0f;
+        private float damageFlash;
+        protected SpriteRenderer spriteRenderer;
+        virtual protected void Awake()
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
         virtual protected void Start()
         {
             currentHealth = maxHealth;
             initialDamageDelay = damageDelay;
+            damageFlash = damageFlashInterval;
         }
         virtual protected void Update()
         {
@@ -27,11 +35,35 @@ namespace AllUnits
             if (isDamage && damageDelay > 0)
             {
                 damageDelay -= Time.deltaTime;
+                DamageDelayAction();
                 if (damageDelay <= 0)
                 {
                     isDamage = false;
                     damageDelay = initialDamageDelay;
+                    damageFlashInterval = damageFlash;
+                    spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1f);
                 }
+            }
+        }
+        protected void DamageDelayAction()
+        {
+            var flashView = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1f);
+            var flashHide = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0f);
+            if (damageDelay < initialDamageDelay - damageFlashInterval)
+            {
+                damageFlashInterval += damageFlash;
+                
+                if (spriteRenderer.color == flashView)
+                {
+                    spriteRenderer.color = flashHide; 
+                } else if (spriteRenderer.color == flashHide)
+                {
+                    spriteRenderer.color = flashView;
+                }
+            }
+            else if (damageDelay > initialDamageDelay * 0.99f)
+            {
+                spriteRenderer.color = flashHide;
             }
         }
     }

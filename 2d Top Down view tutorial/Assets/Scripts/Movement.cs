@@ -5,11 +5,10 @@ public class Movement : Unit
 {
     private Rigidbody2D playerRb;
     private Animator myAnim;
-    
-    public bool isDead { get; private set; } = false;
-    
-    private void Awake()
+   public bool isDead { get; private set; } = false;
+    override protected void Awake()
     {
+        base.Awake();
         playerRb = GetComponent<Rigidbody2D>();
         myAnim = GetComponent<Animator>();
     }
