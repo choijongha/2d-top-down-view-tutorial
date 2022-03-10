@@ -19,6 +19,7 @@ public class AreaTransitionScript : MonoBehaviour
             cam.maxCameraBoundary = newMaxCameraBoundary;
 
             cam.player.position = exitPos.position +(Vector3)playerPosOffset;
+            Debug.Log(cam.minCameraBoundary);
         }
     }
 }

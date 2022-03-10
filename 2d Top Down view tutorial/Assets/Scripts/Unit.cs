@@ -10,26 +10,45 @@ namespace AllUnits
         [SerializeField] internal float maxHealth = 50f;
         [SerializeField] internal float currentHealth;
         [SerializeField] internal float damage = 5f;
-        [SerializeField] internal float damageDelay = 2f;
-        private float initialDamageDelay;
-        [SerializeField] protected bool isDamage = false;
+        [SerializeField] internal float damageDelay = 2f;  
+        protected bool isDamage = false;
+        public bool isDead = false;
         [SerializeField] protected float damageFlashInterval = 0f;
-        private float damageFlash;
+        [SerializeField] protected float damageBound = 0f;
+        private float initialDamageDelay;
+        private float initialDamageFlashInterval;  
         protected SpriteRenderer spriteRenderer;
+        protected Rigidbody2D rb;
         virtual protected void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+            rb = GetComponent<Rigidbody2D>();
         }
         virtual protected void Start()
         {
             currentHealth = maxHealth;
             initialDamageDelay = damageDelay;
-            damageFlash = damageFlashInterval;
+            initialDamageFlashInterval = damageFlashInterval;
         }
         virtual protected void Update()
         {
             DamageDelay();
         }
+        private void OnCollisionStay2D(Collision2D collision)
+        {
+            if (collision.collider.tag == "Enemy" && !isDamage)
+            {
+                isDamage = true;
+                float enemyAttack = collision.gameObject.GetComponent<EnemyController>().damage;
+                currentHealth -= enemyAttack;
+                if (currentHealth <= 0)
+                {
+                    isDead = true;
+                    gameObject.SetActive(false);
+                }
+            }
+        }
+        
         protected void DamageDelay()
         {
             if (isDamage && damageDelay > 0)
@@ -40,7 +59,7 @@ namespace AllUnits
                 {
                     isDamage = false;
                     damageDelay = initialDamageDelay;
-                    damageFlashInterval = damageFlash;
+                    damageFlashInterval = initialDamageFlashInterval;
                     spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 1f);
                 }
             }
@@ -51,7 +70,7 @@ namespace AllUnits
             var flashHide = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0f);
             if (damageDelay < initialDamageDelay - damageFlashInterval)
             {
-                damageFlashInterval += damageFlash;
+                damageFlashInterval += initialDamageFlashInterval;
                 
                 if (spriteRenderer.color == flashView)
                 {

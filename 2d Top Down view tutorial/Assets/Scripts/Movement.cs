@@ -1,52 +1,50 @@
 using UnityEngine;
 using AllUnits;
-[RequireComponent(typeof(Rigidbody2D))]
-public class Movement : Unit
-{
-    private Rigidbody2D playerRb;
-    private Animator myAnim;
-   public bool isDead { get; private set; } = false;
-    override protected void Awake()
+    [RequireComponent(typeof(Rigidbody2D))]
+    public class Movement : Unit
     {
-        base.Awake();
-        playerRb = GetComponent<Rigidbody2D>();
-        myAnim = GetComponent<Animator>();
+        private Animator myAnim;
+        override protected void Awake()
+        {
+            base.Awake();
+            myAnim = GetComponent<Animator>();
+        }
+    protected override void Update()
+    {
+        base.Update();
+        AttackKey();
     }
     private void FixedUpdate()
-    {
-        // Rigidbody2D.velocity
-        /*playerRb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) ;
-        myAnim.SetFloat("MoveX", playerRb.velocity.x);
-        myAnim.SetFloat("MoveY", playerRb.velocity.y);
-        */
+        {
+            // Rigidbody2D.velocity
+            /*playerRb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) ;
+            myAnim.SetFloat("MoveX", playerRb.velocity.x);
+            myAnim.SetFloat("MoveY", playerRb.velocity.y);
+            */
 
-        // Transform.position
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveY = Input.GetAxisRaw("Vertical");
-        Vector3 moveVector = new Vector2(moveX, moveY);
-        playerRb.transform.position += moveVector.normalized * speed *Time.deltaTime;
-        myAnim.SetFloat("MoveX", moveX);
-        myAnim.SetFloat("MoveY", moveY);
-        
-        if(Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Vertical") == -1)
-        {
-            myAnim.SetFloat("LastMoveX", Input.GetAxisRaw("Horizontal"));
-            myAnim.SetFloat("LastMoveY", Input.GetAxisRaw("Vertical"));
-        }
-    }
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.collider.tag == "Enemy" && !isDamage)
-        {
-            isDamage = true;
-            float enemyAttack = collision.gameObject.GetComponent<EnemyController>().damage;
-            currentHealth -= enemyAttack;
-            
-            if (currentHealth <= 0)
+            // Transform.position
+            float moveX = Input.GetAxisRaw("Horizontal");
+            float moveY = Input.GetAxisRaw("Vertical");
+            Vector3 moveVector = new Vector2(moveX, moveY);
+            rb.transform.position += moveVector.normalized * speed * Time.deltaTime;
+            myAnim.SetFloat("MoveX", moveX);
+            myAnim.SetFloat("MoveY", moveY);
+
+            if (Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Vertical") == -1)
             {
-                isDead = true;
-                gameObject.SetActive(false);
+                myAnim.SetFloat("LastMoveX", Input.GetAxisRaw("Horizontal"));
+                myAnim.SetFloat("LastMoveY", Input.GetAxisRaw("Vertical"));
             }
         }
+        private void AttackKey()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            myAnim.SetBool("Attacking", true);
+        } else if(Input.GetKeyUp(KeyCode.Space))
+        {
+            myAnim.SetBool("Attacking",false);
+        }
     }
-}
+    
+    }

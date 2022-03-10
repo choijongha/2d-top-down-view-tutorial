@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using AllUnits;
 public class GameManager : MonoBehaviour
 {
     private Movement playerScript;
