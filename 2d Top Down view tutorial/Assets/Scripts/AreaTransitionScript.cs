@@ -3,8 +3,8 @@ using UnityEngine;
 public class AreaTransitionScript : MonoBehaviour
 {
     private MainCameraController cam;
-    [SerializeField] Vector2 newMinCameraBoundary;
-    [SerializeField] Vector2 newMaxCameraBoundary;
+    public Vector2 newMinCameraBoundary;
+    public Vector2 newMaxCameraBoundary;
     [SerializeField] Vector2 playerPosOffset;
     [SerializeField] Transform exitPos;
     private void Awake()
