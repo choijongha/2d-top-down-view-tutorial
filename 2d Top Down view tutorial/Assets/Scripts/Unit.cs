@@ -6,6 +6,8 @@ namespace AllUnits
     public class Unit : MonoBehaviour
     {
         // 플레이어와 적 유닛이 공통으로 사용할 변수
+        private Movement player;
+        private EnemyController Enemy;
         [SerializeField] protected float speed = 3f;
         [SerializeField] internal float maxHealth = 50f;
         [SerializeField] internal float currentHealth;
@@ -34,7 +36,7 @@ namespace AllUnits
         {
             DamageDelay();
         }
-        private void OnCollisionStay2D(Collision2D collision)
+        /*private void OnCollisionStay2D(Collision2D collision)
         {
             if (collision.collider.tag == "Enemy" && !isDamage)
             {
@@ -47,8 +49,34 @@ namespace AllUnits
                     gameObject.SetActive(false);
                 }
             }
+        }*/
+        virtual protected void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.tag == "HitBox")
+            {
+                Debug.Log("Hit");
+                if (collision.GetComponentInParent<EnemyController>())
+                {
+                    float hitdamageEnemy = collision.GetComponentInParent<EnemyController>().damage;
+                    currentHealth -= hitdamageEnemy;
+                    if (currentHealth <= 0)
+                    {
+                        isDead = true;
+                        gameObject.SetActive(false);
+                    }
+                    
+                }else if (collision.GetComponentInParent<Movement>())
+                {
+                    float hitdamagePlayer = collision.GetComponentInParent<Movement>().damage;
+                    currentHealth -= hitdamagePlayer;
+                    if (currentHealth <= 0)
+                    {
+                        isDead = true;
+                        gameObject.SetActive(false);
+                    }
+                }
+            }
         }
-        
         protected void DamageDelay()
         {
             if (isDamage && damageDelay > 0)

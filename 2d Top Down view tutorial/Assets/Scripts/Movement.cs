@@ -51,9 +51,10 @@ public class Movement : Unit
             myAnim.SetBool("Attacking", false);
         }
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Boundary")
+        base.OnTriggerEnter2D(collision);
+        if (collision.tag == "Boundary")
         {
             boundaryScript = collision.GetComponent<AreaTransitionScript>();
             saveMaxPos = boundaryScript.newMaxCameraBoundary;
