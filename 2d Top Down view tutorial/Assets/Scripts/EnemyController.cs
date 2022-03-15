@@ -12,12 +12,11 @@ public class EnemyController : Unit
     [SerializeField] float attackRange = 1.3f;  
     // 적이 되돌아가는 위치.
     [SerializeField] Transform homePos;
-    private Animator anim;
+    
     private float initialSpeed;
     override protected void Awake()
     {
         base.Awake();
-        anim = GetComponent<Animator>();
         target = FindObjectOfType<Movement>().transform;
     }
     override protected void Start()
@@ -37,14 +36,15 @@ public class EnemyController : Unit
         {
             speed = initialSpeed;
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-            anim.SetFloat("MoveX", target.position.x - transform.position.x);
-            anim.SetBool("IsMoving", true);
+            unitAnimator.SetFloat("MoveX", target.position.x - transform.position.x);
+            unitAnimator.SetBool("IsMoving", true);
         }
         else if (Vector3.Distance(target.position, transform.position) < attackRange && target.gameObject.activeSelf)
         {
-            anim.SetBool("IsMoving", false);
-            anim.SetFloat("MoveX", target.position.x - transform.position.x);
-            anim.SetTrigger("Attack");
+            unitAnimator.SetBool("IsMoving", false);
+            unitAnimator.SetFloat("MoveX", target.position.x - transform.position.x);
+            unitAnimator.SetTrigger("Attack");
+            unitAnimator.SetFloat("AttackSpeed", attackSpeed);
         }
         else
         {
@@ -53,14 +53,14 @@ public class EnemyController : Unit
     }
     private void BackHome()
     {
-        anim.SetBool("IsMoving", true);
-        anim.SetFloat("MoveX", homePos.position.x - transform.position.x);
+        unitAnimator.SetBool("IsMoving", true);
+        unitAnimator.SetFloat("MoveX", homePos.position.x - transform.position.x);
         speed = backSpeed;
         transform.position = Vector3.MoveTowards(transform.position, homePos.position, speed*Time.deltaTime);
         
         if(Vector3.Distance(homePos.position,transform.position) == 0)
         {
-            anim.SetBool("IsMoving", false);
+            unitAnimator.SetBool("IsMoving", false);
         }
     }
     

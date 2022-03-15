@@ -12,8 +12,12 @@ namespace AllUnits
         [SerializeField] internal float maxHealth = 50f;
         [SerializeField] internal float currentHealth;
         [SerializeField] internal float damage = 5f;
-        [SerializeField] internal float damageDelay = 2f;  
+        [SerializeField] internal float damageDelay = 2f;
+        [SerializeField] internal float attackSpeed = 1f;
+        [SerializeField] internal float attackDelay = 1f;
         protected bool isDamage = false;
+        protected bool isAttacking = false;
+        protected Animator unitAnimator;
         public bool isDead = false;
         [SerializeField] protected float damageFlashInterval = 0f;
         [SerializeField] protected float damageBound = 0f;
@@ -25,9 +29,11 @@ namespace AllUnits
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
             rb = GetComponent<Rigidbody2D>();
+            unitAnimator = GetComponent<Animator>();
         }
         virtual protected void Start()
         {
+
             currentHealth = maxHealth;
             initialDamageDelay = damageDelay;
             initialDamageFlashInterval = damageFlashInterval;
@@ -111,6 +117,13 @@ namespace AllUnits
             else if (damageDelay > initialDamageDelay * 0.99f)
             {
                 spriteRenderer.color = flashHide;
+            }
+        }
+        protected void AttackDelay()
+        {
+            if (isAttacking)
+            {
+
             }
         }
     }

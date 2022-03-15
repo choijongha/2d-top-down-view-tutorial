@@ -3,14 +3,12 @@ using AllUnits;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement : Unit
 {
-    private Animator myAnim;
     private AreaTransitionScript boundaryScript;
     public Vector2 saveMaxPos { get; private set; }
     public Vector2 saveMinPos { get; private set; }
     override protected void Awake()
     {
         base.Awake();
-        myAnim = GetComponent<Animator>();
     }
 
     protected override void Update()
@@ -22,8 +20,8 @@ public class Movement : Unit
     {
         // Rigidbody2D.velocity
         /*playerRb.velocity = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) ;
-        myAnim.SetFloat("MoveX", playerRb.velocity.x);
-        myAnim.SetFloat("MoveY", playerRb.velocity.y);
+        unitAnimator.SetFloat("MoveX", playerRb.velocity.x);
+        unitAnimator.SetFloat("MoveY", playerRb.velocity.y);
         */
 
         // Transform.position
@@ -31,24 +29,25 @@ public class Movement : Unit
         float moveY = Input.GetAxisRaw("Vertical");
         Vector3 moveVector = new Vector2(moveX, moveY);
         rb.transform.position += moveVector.normalized * speed * Time.deltaTime;
-        myAnim.SetFloat("MoveX", moveX);
-        myAnim.SetFloat("MoveY", moveY);
+        unitAnimator.SetFloat("MoveX", moveX);
+        unitAnimator.SetFloat("MoveY", moveY);
 
         if (Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Vertical") == -1)
         {
-            myAnim.SetFloat("LastMoveX", Input.GetAxisRaw("Horizontal"));
-            myAnim.SetFloat("LastMoveY", Input.GetAxisRaw("Vertical"));
+            unitAnimator.SetFloat("LastMoveX", Input.GetAxisRaw("Horizontal"));
+            unitAnimator.SetFloat("LastMoveY", Input.GetAxisRaw("Vertical"));
         }
     }
     private void AttackKey()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            myAnim.SetBool("Attacking", true);
+            unitAnimator.SetBool("Attacking", true);
+            isAttacking = true;
         }
         else if (Input.GetKeyUp(KeyCode.Space))
         {
-            myAnim.SetBool("Attacking", false);
+            unitAnimator.SetBool("Attacking", false);
         }
     }
     protected override void OnTriggerEnter2D(Collider2D collision)
