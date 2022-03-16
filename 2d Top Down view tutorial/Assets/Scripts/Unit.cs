@@ -16,13 +16,14 @@ namespace AllUnits
         [SerializeField] internal float attackSpeed = 1f;
         [SerializeField] internal float attackDelay = 1f;
         protected bool isDamage = false;
-        protected bool isAttacking = false;
+        protected bool isAttackDelay = false;
         protected Animator unitAnimator;
         public bool isDead = false;
         [SerializeField] protected float damageFlashInterval = 0f;
         [SerializeField] protected float damageBound = 0f;
         private float initialDamageDelay;
-        private float initialDamageFlashInterval;  
+        private float initialDamageFlashInterval;
+        private float initialAttackDelay;
         protected SpriteRenderer spriteRenderer;
         protected Rigidbody2D rb;
         virtual protected void Awake()
@@ -33,14 +34,15 @@ namespace AllUnits
         }
         virtual protected void Start()
         {
-
             currentHealth = maxHealth;
             initialDamageDelay = damageDelay;
             initialDamageFlashInterval = damageFlashInterval;
+            initialAttackDelay = attackDelay;
         }
         virtual protected void Update()
         {
             DamageDelay();
+            AttackDelay();
         }
         /*private void OnCollisionStay2D(Collision2D collision)
         {
@@ -60,10 +62,10 @@ namespace AllUnits
         {
             if (collision.tag == "HitBox")
             {
-                Debug.Log("Hit");
-                if (collision.GetComponentInParent<EnemyController>())
+                if (collision.GetComponentInParent<EnemyController>() && !isDamage)
                 {
                     float hitdamageEnemy = collision.GetComponentInParent<EnemyController>().damage;
+                    isDamage = true;
                     currentHealth -= hitdamageEnemy;
                     if (currentHealth <= 0)
                     {
@@ -75,6 +77,7 @@ namespace AllUnits
                 {
                     float hitdamagePlayer = collision.GetComponentInParent<Movement>().damage;
                     currentHealth -= hitdamagePlayer;
+                    
                     if (currentHealth <= 0)
                     {
                         isDead = true;
@@ -121,9 +124,14 @@ namespace AllUnits
         }
         protected void AttackDelay()
         {
-            if (isAttacking)
+            if (isAttackDelay)
             {
-
+                attackDelay -= Time.deltaTime;
+                if(attackDelay <= 0)
+                {
+                    isAttackDelay = false;
+                    attackDelay = initialAttackDelay;
+                }
             }
         }
     }

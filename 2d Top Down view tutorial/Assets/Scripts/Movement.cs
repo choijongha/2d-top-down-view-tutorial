@@ -43,7 +43,8 @@ public class Movement : Unit
         if (Input.GetKeyDown(KeyCode.Space))
         {
             unitAnimator.SetBool("Attacking", true);
-            isAttacking = true;
+            isAttackDelay = true;
+            
         }
         else if (Input.GetKeyUp(KeyCode.Space))
         {
