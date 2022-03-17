@@ -42,9 +42,14 @@ public class EnemyController : Unit
         else if (Vector3.Distance(target.position, transform.position) < attackRange && target.gameObject.activeSelf)
         {
             unitAnimator.SetBool("IsMoving", false);
-            unitAnimator.SetFloat("MoveX", target.position.x - transform.position.x);
-            unitAnimator.SetTrigger("Attack");
-            unitAnimator.SetFloat("AttackSpeed", attackSpeed);
+            if (!isAttackDelay)
+            {
+                unitAnimator.SetFloat("MoveX", target.position.x - transform.position.x);
+                unitAnimator.SetTrigger("Attack");
+                unitAnimator.SetFloat("AttackSpeed", attackSpeed);
+                isAttackDelay = true;
+            }
+            
         }
         else
         {

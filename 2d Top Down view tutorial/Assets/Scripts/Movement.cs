@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using AllUnits;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Movement : Unit
@@ -36,19 +37,24 @@ public class Movement : Unit
         {
             unitAnimator.SetFloat("LastMoveX", Input.GetAxisRaw("Horizontal"));
             unitAnimator.SetFloat("LastMoveY", Input.GetAxisRaw("Vertical"));
+            unitAnimator.SetBool("IsMoving", true);
         }
     }
     private void AttackKey()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !isAttackDelay)
         {
-            unitAnimator.SetBool("Attacking", true);
+            unitAnimator.SetTrigger("Attacking");
             isAttackDelay = true;
-            
+            unitAnimator.SetBool("IsIdle",false);
+            unitAnimator.SetBool("IsMoving",false);
         }
-        else if (Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetKey(KeyCode.Space) && !isAttackDelay)
         {
-            unitAnimator.SetBool("Attacking", false);
+            unitAnimator.SetTrigger("Attacking");
+            isAttackDelay = true;
+            unitAnimator.SetBool("IsIdle", false);
+            unitAnimator.SetBool("IsMoving", false);
         }
     }
     protected override void OnTriggerEnter2D(Collider2D collision)

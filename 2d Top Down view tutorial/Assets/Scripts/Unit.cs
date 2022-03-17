@@ -127,7 +127,8 @@ namespace AllUnits
             if (isAttackDelay)
             {
                 attackDelay -= Time.deltaTime;
-                if(attackDelay <= 0)
+                unitAnimator.SetBool("IsIdle", true);
+                if (attackDelay <= 0)
                 {
                     isAttackDelay = false;
                     attackDelay = initialAttackDelay;
