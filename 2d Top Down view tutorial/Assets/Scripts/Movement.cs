@@ -48,6 +48,7 @@ public class Movement : Unit
             isAttackDelay = true;
             unitAnimator.SetBool("IsIdle",false);
             unitAnimator.SetBool("IsMoving",false);
+            unitAnimator.SetFloat("AttackSpeed", attackSpeed);
         }
         else if (Input.GetKey(KeyCode.Space) && !isAttackDelay)
         {
