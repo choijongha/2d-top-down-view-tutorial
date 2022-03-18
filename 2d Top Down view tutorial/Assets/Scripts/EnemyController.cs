@@ -12,7 +12,7 @@ public class EnemyController : Unit
     [SerializeField] float attackRange = 1.3f;
     // 적이 되돌아가는 위치.
     [SerializeField] Transform homePos;
-    public int exp;
+    
     
     private float initialSpeed;
     override protected void Awake()

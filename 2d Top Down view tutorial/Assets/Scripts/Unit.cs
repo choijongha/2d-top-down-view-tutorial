@@ -26,6 +26,7 @@ namespace AllUnits
         private float initialAttackDelay;
         protected SpriteRenderer spriteRenderer;
         protected Rigidbody2D rb;
+        public int exp;
         virtual protected void Awake()
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
@@ -82,7 +83,7 @@ namespace AllUnits
                     {
                         isDead = true;
                         gameObject.SetActive(false);
-                        hitdamagePlayer.levelDesign.currentExp += 5000;
+                        hitdamagePlayer.levelDesign.currentExp += exp;
                     }
                 }
             }
