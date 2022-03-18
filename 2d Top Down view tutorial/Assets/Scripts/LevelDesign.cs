@@ -8,7 +8,7 @@ public class LevelDesign : MonoBehaviour
     [SerializeField] int currentLevel;
     [SerializeField] int[] expToLevelUp;
     [SerializeField] int baseExp;
-    [SerializeField] int currentExp;
+    public int currentExp { get; set; }
     [SerializeField] TextMeshProUGUI text;
     private void Start()
     {
@@ -21,7 +21,17 @@ public class LevelDesign : MonoBehaviour
             {
                 expToLevelUp[i] = Mathf.FloorToInt(expToLevelUp[i - 1] * 1.05f);
             }
-            
+        }
+    }
+    private void Update()
+    {
+        if(expToLevelUp[currentLevel -1] <= currentExp)
+        {
+            int initialExp = currentExp - expToLevelUp[currentLevel - 1];
+            currentLevel++;
+            Debug.Log("Level Up");
+            text.text = "Level : " + currentLevel;
+            currentExp = initialExp;
         }
     }
 }

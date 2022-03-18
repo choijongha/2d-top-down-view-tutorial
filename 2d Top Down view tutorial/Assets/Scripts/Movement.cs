@@ -7,6 +7,7 @@ public class Movement : Unit
     private AreaTransitionScript boundaryScript;
     public Vector2 saveMaxPos { get; private set; }
     public Vector2 saveMinPos { get; private set; }
+    public LevelDesign levelDesign;
     override protected void Awake()
     {
         base.Awake();

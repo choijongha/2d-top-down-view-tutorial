@@ -75,13 +75,14 @@ namespace AllUnits
                     
                 }else if (collision.GetComponentInParent<Movement>())
                 {
-                    float hitdamagePlayer = collision.GetComponentInParent<Movement>().damage;
-                    currentHealth -= hitdamagePlayer;
+                    Movement hitdamagePlayer = collision.GetComponentInParent<Movement>();
+                    currentHealth -= hitdamagePlayer.damage;
                     
                     if (currentHealth <= 0)
                     {
                         isDead = true;
                         gameObject.SetActive(false);
+                        hitdamagePlayer.levelDesign.currentExp += 5000;
                     }
                 }
             }

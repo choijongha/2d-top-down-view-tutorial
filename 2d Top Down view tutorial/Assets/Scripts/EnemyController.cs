@@ -9,9 +9,10 @@ public class EnemyController : Unit
     // 공격하기 위해 따라가는 범위
     [SerializeField] float followRange = 5f;
     // 따라감을 멈추고 공격하는 범위 안.
-    [SerializeField] float attackRange = 1.3f;  
+    [SerializeField] float attackRange = 1.3f;
     // 적이 되돌아가는 위치.
     [SerializeField] Transform homePos;
+    public int exp;
     
     private float initialSpeed;
     override protected void Awake()
@@ -49,7 +50,6 @@ public class EnemyController : Unit
                 unitAnimator.SetFloat("AttackSpeed", attackSpeed);
                 isAttackDelay = true;
             }
-            
         }
         else
         {
