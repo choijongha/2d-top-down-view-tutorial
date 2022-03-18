@@ -6,8 +6,6 @@ namespace AllUnits
     public class Unit : MonoBehaviour
     {
         // 플레이어와 적 유닛이 공통으로 사용할 변수
-        private Movement player;
-        private EnemyController Enemy;
         [SerializeField] protected float speed = 3f;
         [SerializeField] internal float maxHealth = 50f;
         [SerializeField] internal float currentHealth;
