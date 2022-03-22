@@ -13,6 +13,7 @@ namespace AllUnits
         [SerializeField] internal float damageDelay = 2f;
         [SerializeField] internal float attackSpeed = 1f;
         [SerializeField] internal float attackDelay = 1f;
+        internal float defaultAttackDelay;
         protected bool isDamage = false;
         protected bool isAttackDelay = false;
         protected Animator unitAnimator;
@@ -21,7 +22,7 @@ namespace AllUnits
         [SerializeField] protected float damageBound = 0f;
         private float initialDamageDelay;
         private float initialDamageFlashInterval;
-        private float initialAttackDelay;
+        internal float initialAttackDelay;
         protected SpriteRenderer spriteRenderer;
         protected Rigidbody2D rb;
         public int exp;
@@ -37,6 +38,7 @@ namespace AllUnits
             initialDamageDelay = damageDelay;
             initialDamageFlashInterval = damageFlashInterval;
             initialAttackDelay = attackDelay;
+            defaultAttackDelay = initialAttackDelay;
         }
         virtual protected void Update()
         {
