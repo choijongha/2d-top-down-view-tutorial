@@ -11,7 +11,7 @@ public class EnemyController : Unit
     // 따라감을 멈추고 공격하는 범위 안.
     [SerializeField] float attackRange = 1.3f;
     // 적이 되돌아가는 위치.
-    [SerializeField] Transform homePos;
+    private Vector2 homePos;
     
     
     private float initialSpeed;
@@ -24,6 +24,7 @@ public class EnemyController : Unit
     {
         base.Start();
         initialSpeed = speed;
+        homePos = transform.position;
     }
     override protected void Update()
     {
@@ -59,11 +60,11 @@ public class EnemyController : Unit
     private void BackHome()
     {
         unitAnimator.SetBool("IsMoving", true);
-        unitAnimator.SetFloat("MoveX", homePos.position.x - transform.position.x);
+        unitAnimator.SetFloat("MoveX", homePos.x - transform.position.x);
         speed = backSpeed;
-        transform.position = Vector3.MoveTowards(transform.position, homePos.position, speed*Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, homePos, speed*Time.deltaTime);
         
-        if(Vector3.Distance(homePos.position,transform.position) == 0)
+        if(Vector3.Distance(homePos,transform.position) == 0)
         {
             unitAnimator.SetBool("IsMoving", false);
         }
