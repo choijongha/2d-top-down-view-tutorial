@@ -48,7 +48,7 @@ public class MonsterCreator : MonoBehaviour
 
     public void CreateMonster()
     {
-        EnemyController clone = Instantiate(monsterFlower, monsters.transform).GetComponent<EnemyController>();
+        EnemyController clone = Instantiate(monsterFlower,new Vector2(monsters.transform.position.x,Random.Range(-3f,3f)),transform.rotation,monsters.transform).GetComponent<EnemyController>();
         clone.maxHealth = ChangeHpValue();
         clone.speed = ChangeMoveValue();
         clone.damage = ChangeDamageValue();
