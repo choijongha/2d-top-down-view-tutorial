@@ -41,8 +41,12 @@ public class PlayerStatPanel : MonoBehaviour
     }
     public void ChangeMoveValue()
     {
-        movetext.text = $"Move Speed: {moveInput.text}";
-        playerScript.speed = int.Parse(moveInput.text);
+        if(moveInput.text != "")
+        {
+            movetext.text = $"Move Speed: {moveInput.text}";
+            playerScript.speed = int.Parse(moveInput.text);
+        }
+        
     }
     public void ChangeHpValue()
     {

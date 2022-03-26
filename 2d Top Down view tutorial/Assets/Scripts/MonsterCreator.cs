@@ -29,31 +29,20 @@ public class MonsterCreator : MonoBehaviour
             monsterPanel.SetActive(false);
         }
     }
-    public int ChangeHpValue()
-    {
-        return int.Parse(hpInput.text);
-    }
-    public int ChangeMoveValue()
-    {
-        return int.Parse(moveInput.text);
-    }
-    public int ChangeDamageValue()
-    {
-        return int.Parse(damageInput.text);
-    }
-    public int ChangeAttackSpeedValue()
-    {
-        return int.Parse(attackSpeedInput.text);
-    }
 
     public void CreateMonster()
     {
-        EnemyController clone = Instantiate(monsterFlower,new Vector2(monsters.transform.position.x,Random.Range(-3f,3f)),transform.rotation,monsters.transform).GetComponent<EnemyController>();
-        clone.maxHealth = ChangeHpValue();
-        clone.speed = ChangeMoveValue();
-        clone.damage = ChangeDamageValue();
-        clone.attackSpeed = ChangeAttackSpeedValue();
-        clone.attackDelay = clone.attackDelay / clone.attackSpeed;
-        Debug.Log("Creator");
+        if (hpInput.text != "" && moveInput.text != "" && damageInput.text != "" && attackSpeedInput.text != "")
+        {
+            Debug.Log(hpInput.text);
+            EnemyController clone = Instantiate(monsterFlower,new Vector2(monsters.transform.position.x,Random.Range(-3f,3f)),transform.rotation,monsters.transform).GetComponent<EnemyController>();
+            clone.maxHealth = int.Parse(hpInput.text);
+            clone.speed = int.Parse(moveInput.text);
+            clone.damage = int.Parse(damageInput.text);
+            clone.attackSpeed = int.Parse(attackSpeedInput.text);
+            clone.attackDelay = clone.attackDelay / clone.attackSpeed;
+            Debug.Log("Creator");
+        }
+            
     }
 }
