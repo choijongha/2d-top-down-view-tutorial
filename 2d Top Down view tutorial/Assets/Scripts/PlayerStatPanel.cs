@@ -50,17 +50,23 @@ public class PlayerStatPanel : MonoBehaviour
     }
     public void ChangeHpValue()
     {
-        hptext.text = $"Hp : {hpInput.text}";
-        playerScript.maxHealth = int.Parse(hpInput.text);
+        if (hpInput.text != "")
+        {
+            hptext.text = $"Hp : {hpInput.text}";
+            playerScript.maxHealth = int.Parse(hpInput.text);
+        }
     }
     public void ChangeDamageValue()
     {
-        damagetext.text = $"Damage : {damageInput.text}";
-        playerScript.damage = int.Parse(damageInput.text);
+        if (damageInput.text != "")
+        {
+            damagetext.text = $"Damage : {damageInput.text}";
+            playerScript.damage = int.Parse(damageInput.text);
+        }
     }
     public void ChangeASpeedValue()
     {
-        if(int.Parse(attackSpeedInput.text) != 0)
+        if (attackSpeedInput.text != "")
         {
             attackSpeedtext.text = $"A/Speed: {attackSpeedInput.text}";
             playerScript.attackSpeed = int.Parse(attackSpeedInput.text);
