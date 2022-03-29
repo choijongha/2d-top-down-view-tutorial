@@ -12,13 +12,20 @@ public class InputKeyBoard : MonoBehaviour
     [SerializeField] Image spacePanel;
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        Keyboard();
+    }
+    private void Keyboard()
+    {
+        // left
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             aPanel.color = Color.black;
-        }else if((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow)))
+        }
+        else if ((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.LeftArrow)))
         {
             aPanel.color = Color.white;
         }
+        // down
         if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             sPanel.color = Color.black;
@@ -27,6 +34,7 @@ public class InputKeyBoard : MonoBehaviour
         {
             sPanel.color = Color.white;
         }
+        // up
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             wPanel.color = Color.black;
@@ -35,14 +43,7 @@ public class InputKeyBoard : MonoBehaviour
         {
             wPanel.color = Color.white;
         }
-        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            sPanel.color = Color.black;
-        }
-        else if ((Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.DownArrow)))
-        {
-            sPanel.color = Color.white;
-        }
+        // right
         if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             dPanel.color = Color.black;
@@ -51,6 +52,7 @@ public class InputKeyBoard : MonoBehaviour
         {
             dPanel.color = Color.white;
         }
+        // shoot
         if (Input.GetKeyDown(KeyCode.Space))
         {
             spacePanel.color = Color.black;
@@ -59,6 +61,5 @@ public class InputKeyBoard : MonoBehaviour
         {
             spacePanel.color = Color.white;
         }
-
     }
 }

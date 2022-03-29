@@ -78,12 +78,13 @@ namespace AllUnits
                 {
                     Movement hitdamagePlayer = collision.GetComponentInParent<Movement>();
                     currentHealth -= hitdamagePlayer.damage;
-                    
+                    unitAnimator.SetTrigger("hurt");
                     if (currentHealth <= 0)
                     {
                         isDead = true;
-                        gameObject.SetActive(false);
+                        unitAnimator.SetBool("Died", true);
                         hitdamagePlayer.levelDesign.currentExp += exp;
+                        Destroy(gameObject, 1f);
                     }
                 }
             }
