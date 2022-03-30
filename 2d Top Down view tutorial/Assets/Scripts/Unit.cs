@@ -78,7 +78,7 @@ namespace AllUnits
                 {
                     Movement hitdamagePlayer = collision.GetComponentInParent<Movement>();
                     currentHealth -= hitdamagePlayer.damage;
-                    unitAnimator.SetTrigger("hurt");
+                    unitAnimator.SetTrigger("Hurt");
                     if (currentHealth <= 0)
                     {
                         isDead = true;
