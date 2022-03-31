@@ -61,7 +61,7 @@ namespace AllUnits
         }*/
         virtual protected void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == "HitBox")
+            if (collision.tag == "HitBox" && !isDead)
             {
                 if (collision.GetComponentInParent<EnemyController>() && !isDamage)
                 {
