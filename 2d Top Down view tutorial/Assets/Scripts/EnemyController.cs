@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using AllUnits;
 
 public class EnemyController : Unit
@@ -12,8 +13,6 @@ public class EnemyController : Unit
     [SerializeField] float attackRange = 1.3f;
     // 적이 되돌아가는 위치.
     private Vector2 homePos;
-    
-    
     private float initialSpeed;
     override protected void Awake()
     {
@@ -73,5 +72,5 @@ public class EnemyController : Unit
             unitAnimator.SetBool("IsMoving", false);
         }
     }
-    
+
 }
