@@ -8,6 +8,7 @@ public class PlayerStatPanel : MonoBehaviour
 {
     public GameObject playerPanel;
     public Movement playerScript;
+    public LevelDesign levelDesign;
     public TextMeshProUGUI movetext;
     public TextMeshProUGUI hptext;
     public TextMeshProUGUI damagetext;
@@ -16,6 +17,10 @@ public class PlayerStatPanel : MonoBehaviour
     public TMP_InputField hpInput;
     public TMP_InputField damageInput;
     public TMP_InputField attackSpeedInput;
+    public TextMeshProUGUI levelUpMoveText;
+    public TextMeshProUGUI levelUpHpText;
+    public TextMeshProUGUI levelUpDamageText;
+    public TextMeshProUGUI levelUpAttackSpeedText;
 
     private void Awake()
     {
@@ -27,6 +32,13 @@ public class PlayerStatPanel : MonoBehaviour
         hptext.text = $"Hp : {playerScript.maxHealth}";
         damagetext.text = $"Damage : {playerScript.damage}";
         attackSpeedtext.text = $"A/Speed: {playerScript.attackSpeed}";
+
+        Upstats();
+        DamagePopup.Create(Vector3.zero, 300);
+    }
+    private void Update()
+    {
+        Upstats();
     }
     public void PlayerPanelOpenClose()
     {
@@ -46,7 +58,6 @@ public class PlayerStatPanel : MonoBehaviour
             movetext.text = $"Move Speed: {moveInput.text}";
             playerScript.speed = int.Parse(moveInput.text);
         }
-        
     }
     public void ChangeHpValue()
     {
@@ -70,7 +81,6 @@ public class PlayerStatPanel : MonoBehaviour
         {
             attackSpeedtext.text = $"A/Speed: {attackSpeedInput.text}";
             playerScript.attackSpeed = int.Parse(attackSpeedInput.text);
-            playerScript.initialAttackDelay = playerScript.defaultAttackDelay / playerScript.attackSpeed;
         }  
     }
     public void HPFull()
@@ -79,6 +89,12 @@ public class PlayerStatPanel : MonoBehaviour
         {
             playerScript.currentHealth = playerScript.maxHealth;
         }
-        
+    }
+    private void Upstats()
+    {
+        levelUpMoveText.text = $"+{levelDesign.levelUpMove}";
+        levelUpHpText.text = $"+{levelDesign.levelUpMaxHealth}";
+        levelUpDamageText.text = $"+{levelDesign.levelUpDamageUp}";
+        levelUpAttackSpeedText.text = $"+{levelDesign.levelUpAttackSpeed}";
     }
 }

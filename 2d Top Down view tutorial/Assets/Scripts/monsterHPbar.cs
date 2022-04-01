@@ -26,7 +26,6 @@ public class monsterHPbar : MonoBehaviour
     {
         rectHP.position = Camera.main.WorldToScreenPoint(enemyScript.transform.position + (Vector3)offset);
         monsterHP.maxValue = enemyScript.maxHealth;
-        
     }
     private void LateUpdate()
     {

@@ -34,7 +34,6 @@ public class MonsterCreator : MonoBehaviour
     {
         if (hpInput.text != "" && moveInput.text != "" && damageInput.text != "" && attackSpeedInput.text != "")
         {
-            Debug.Log(hpInput.text);
             EnemyController clone = Instantiate(monsterFlower,new Vector2(monsters.transform.position.x,Random.Range(-3f,3f)),transform.rotation,monsters.transform).GetComponent<EnemyController>();
             clone.maxHealth = int.Parse(hpInput.text);
             clone.speed = int.Parse(moveInput.text);

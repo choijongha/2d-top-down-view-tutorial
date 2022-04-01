@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     private Movement playerScript;
     [SerializeField] float waitToLoad = 2f;
+    public Transform damageText;
     private void Awake()
     {
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
@@ -26,4 +27,5 @@ public class GameManager : MonoBehaviour
             }
         }
     }
+
 }
