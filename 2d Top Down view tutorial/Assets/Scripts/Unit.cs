@@ -55,6 +55,7 @@ namespace AllUnits
         {
             if (collision.tag == "HitBox" && !isDead)
             {
+                bool isCritical = UnityEngine.Random.Range(0, 100) < 30;
                 // 적이 플레이어 공격
                 if (collision.GetComponentInParent<EnemyController>() && !isDamage)
                 {
@@ -75,6 +76,7 @@ namespace AllUnits
                     Movement hitdamagePlayer = collision.GetComponentInParent<Movement>();
                     currentHealth -= hitdamagePlayer.damage;
                     unitAnimator.SetTrigger("Hurt");
+                    DamagePopup.Create(transform.position, hitdamagePlayer.damage, isCritical);
                     // 죽는다면
                     if (currentHealth <= 0)
                     {

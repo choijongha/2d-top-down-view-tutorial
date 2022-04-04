@@ -34,7 +34,6 @@ public class PlayerStatPanel : MonoBehaviour
         attackSpeedtext.text = $"A/Speed: {playerScript.attackSpeed}";
 
         Upstats();
-        DamagePopup.Create(Vector3.zero, 300);
     }
     private void Update()
     {

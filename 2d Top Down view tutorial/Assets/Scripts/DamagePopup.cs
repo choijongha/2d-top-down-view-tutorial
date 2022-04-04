@@ -6,13 +6,13 @@ using UnityEngine;
 public class DamagePopup : MonoBehaviour
 {
     // Create Damage Popup
-    public static DamagePopup Create(Vector3 position, int damageAmount)
+    public static DamagePopup Create(Vector3 position, float damageAmount, bool isCritical)
     {
         GameManager gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Transform damagePopupTransform = Instantiate(gameManager.damageText, position, Quaternion.identity);
 
         DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
-        damagePopup.Setup(damageAmount);
+        damagePopup.Setup(damageAmount, isCritical);
 
         return damagePopup;
     }
@@ -23,10 +23,23 @@ public class DamagePopup : MonoBehaviour
     {
         textMesh = transform.GetComponent<TextMeshPro>();
     }
-    private void Setup(int damageAmount)
+    private void Setup(float damageAmount, bool isCritical)
     {
         textMesh.SetText(damageAmount.ToString());
-        textMeshColor = textMesh.color;
+        if (!isCritical)
+        {
+            textMesh.fontSize = 3;
+            textMeshColor = Color.yellow;
+        }
+        else
+        {
+            textMesh.fontSize = 5;
+            textMeshColor.r = 1;
+            textMeshColor.g = 0;
+            textMeshColor.b = 0;
+            textMeshColor.a = 1;
+        }
+        textMesh.color = textMeshColor;
         disappearTimer = 1f;
     }
     private void Update()
