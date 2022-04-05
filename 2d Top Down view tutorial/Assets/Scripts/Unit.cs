@@ -63,6 +63,8 @@ namespace AllUnits
                     float hitdamageEnemy = collision.GetComponentInParent<EnemyController>().damage;
                     isDamage = true;
                     currentHealth -= hitdamageEnemy;
+                    Vector3 offset = new Vector2(0.5f, 1f);
+                    DamagePopup.Create(transform.position + offset, hitdamageEnemy, isCritical);
                     // Á×´Â´Ù¸é
                     if (currentHealth <= 0)
                     {
