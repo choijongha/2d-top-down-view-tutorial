@@ -21,8 +21,8 @@ public class LevelDesign : MonoBehaviour
     public int levelUpDamageUp = 0;
     public int levelUpAttackSpeed = 0;
     private float initialMove = 0;
-    private float initialMaxHealth = 0;
-    private float initialDamageUp = 0;
+    private int initialMaxHealth = 0;
+    private int initialDamageUp = 0;
     private float initialAttackSpeed = 0;
     private void Awake()
     {

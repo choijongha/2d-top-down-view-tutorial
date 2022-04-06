@@ -8,9 +8,9 @@ namespace AllUnits
     {
         // 플레이어와 적 유닛이 공통으로 사용할 스텟
         [SerializeField] internal float speed = 3f;
-        [SerializeField] internal float maxHealth = 50f;
-        [SerializeField] internal float currentHealth;
-        [SerializeField] internal float damage = 5f;
+        [SerializeField] internal int maxHealth = 50;
+        [SerializeField] internal int currentHealth;
+        [SerializeField] internal int damage = 5;
         [SerializeField] internal float damageDelay = 2f;
         [SerializeField] internal float attackSpeed = 1f;
         [SerializeField] internal float attackDelay = 1f;
@@ -60,11 +60,21 @@ namespace AllUnits
                 if (collision.GetComponentInParent<EnemyController>() && !isDamage)
                 {
                     // 공격 당할 때
-                    float hitdamageEnemy = collision.GetComponentInParent<EnemyController>().damage;
+                    int hitdamageEnemy = collision.GetComponentInParent<EnemyController>().damage;
+                    float damageRandom = UnityEngine.Random.Range(hitdamageEnemy, hitdamageEnemy * 1.5f);
+                    int criticalDamage = (int)damageRandom * 2;
                     isDamage = true;
-                    currentHealth -= hitdamageEnemy;
                     Vector3 offset = new Vector2(0.5f, 1f);
-                    DamagePopup.Create(transform.position + offset, hitdamageEnemy, isCritical);
+                    if (!isCritical)
+                    {
+                        currentHealth -= (int)damageRandom;
+                        DamagePopup.Create(transform.position + offset, (int)damageRandom, isCritical);
+                    }
+                    else
+                    {
+                        currentHealth -= criticalDamage;
+                        DamagePopup.Create(transform.position + offset, criticalDamage, isCritical);
+                    }  
                     // 죽는다면
                     if (currentHealth <= 0)
                     {
@@ -76,9 +86,19 @@ namespace AllUnits
                 {
                     // 공격 당할 때
                     Movement hitdamagePlayer = collision.GetComponentInParent<Movement>();
-                    currentHealth -= hitdamagePlayer.damage;
-                    unitAnimator.SetTrigger("Hurt");
-                    DamagePopup.Create(transform.position, hitdamagePlayer.damage, isCritical);
+                    float damageRandom = UnityEngine.Random.Range(hitdamagePlayer.damage, hitdamagePlayer.damage * 1.5f);
+                    int criticalDamage = (int)damageRandom * 2;
+                    if (!isCritical)
+                    {
+                        currentHealth -= (int)hitdamagePlayer.damage;
+                        DamagePopup.Create(transform.position, (int)hitdamagePlayer.damage, isCritical);
+                    }
+                    else
+                    {
+                        currentHealth -= criticalDamage;
+                        DamagePopup.Create(transform.position, criticalDamage, isCritical);
+                    }   
+                    unitAnimator.SetTrigger("Hurt");                    
                     // 죽는다면
                     if (currentHealth <= 0)
                     {
