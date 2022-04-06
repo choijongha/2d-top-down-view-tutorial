@@ -84,14 +84,14 @@ namespace AllUnits
                 // 플레이어가 적 공격    
                 }else if (collision.GetComponentInParent<Movement>())
                 {
-                    // 공격 당할 때
+                    // 적이 플레이어에게 공격 당할 때
                     Movement hitdamagePlayer = collision.GetComponentInParent<Movement>();
                     float damageRandom = UnityEngine.Random.Range(hitdamagePlayer.damage, hitdamagePlayer.damage * 1.5f);
                     int criticalDamage = (int)damageRandom * 2;
                     if (!isCritical)
                     {
                         currentHealth -= (int)hitdamagePlayer.damage;
-                        DamagePopup.Create(transform.position, (int)hitdamagePlayer.damage, isCritical);
+                        DamagePopup.Create(transform.position, (int)damageRandom, isCritical);
                     }
                     else
                     {
@@ -99,7 +99,7 @@ namespace AllUnits
                         DamagePopup.Create(transform.position, criticalDamage, isCritical);
                     }   
                     unitAnimator.SetTrigger("Hurt");                    
-                    // 죽는다면
+                    // 적이 죽는다면
                     if (currentHealth <= 0)
                     {
                         isDead = true;
