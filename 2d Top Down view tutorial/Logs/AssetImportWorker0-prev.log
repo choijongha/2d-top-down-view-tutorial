@@ -445,3 +445,60 @@ Received Prepare
 Registering precompiled user dll's ...
 Registered in 0.012673 seconds.
 Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.22 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.146 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.68 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2200 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 103.2 MB.
+System memory in use after: 103.3 MB.
+
+Unloading 17 unused Assets to reduce memory usage. Loaded Objects now: 2711.
+Total: 3.220500 ms (FindLiveObjects: 0.308100 ms CreateObjectMapping: 0.141800 ms MarkObjects: 2.739800 ms  DeleteObjects: 0.028200 ms)
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.015913 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 1.35 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.203 seconds
+Platform modules already initialized, skipping
+Refreshing native plugins compatible for Editor in 0.84 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 2200 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 103.2 MB.
+System memory in use after: 103.3 MB.
+
+Unloading 17 unused Assets to reduce memory usage. Loaded Objects now: 2713.
+Total: 5.791400 ms (FindLiveObjects: 0.554300 ms CreateObjectMapping: 0.221000 ms MarkObjects: 4.983500 ms  DeleteObjects: 0.029600 ms)
+
+========================================================================
+Received Prepare
+Refreshing native plugins compatible for Editor in 11.06 ms, found 3 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 15 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 59.3 MB.
+System memory in use after: 59.4 MB.
+
+Unloading 15 unused Assets to reduce memory usage. Loaded Objects now: 2713.
+Total: 4.398500 ms (FindLiveObjects: 0.340100 ms CreateObjectMapping: 0.155700 ms MarkObjects: 3.873800 ms  DeleteObjects: 0.026700 ms)
+
+========================================================================
+Received Import Request.
+  Time since last request: 1136.398639 seconds.
+  path: Assets/Prefabs/mon4_sprite_base_0.prefab
+  artifactKey: Guid(0db708760f3298c478ac2d053e5f0fc5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/mon4_sprite_base_0.prefab using Guid(0db708760f3298c478ac2d053e5f0fc5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1034e9e592c44965091fdb7d9e22333c') in 0.146994 seconds
+  Import took 0.154402 seconds .
+
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file

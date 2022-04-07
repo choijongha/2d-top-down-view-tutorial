@@ -55,6 +55,7 @@ namespace AllUnits
         {
             if (collision.tag == "HitBox" && !isDead)
             {
+                Vector3 offset = new Vector2(0.5f, 0.7f);
                 bool isCritical = UnityEngine.Random.Range(0, 100) < 30;
                 // 적이 플레이어 공격
                 if (collision.GetComponentInParent<EnemyController>() && !isDamage)
@@ -64,7 +65,7 @@ namespace AllUnits
                     float damageRandom = UnityEngine.Random.Range(hitdamageEnemy, hitdamageEnemy * 1.5f);
                     int criticalDamage = (int)damageRandom * 2;
                     isDamage = true;
-                    Vector3 offset = new Vector2(0.5f, 1f);
+                    
                     if (!isCritical)
                     {
                         currentHealth -= (int)damageRandom;
@@ -91,12 +92,12 @@ namespace AllUnits
                     if (!isCritical)
                     {
                         currentHealth -= (int)hitdamagePlayer.damage;
-                        DamagePopup.Create(transform.position, (int)damageRandom, isCritical);
+                        DamagePopup.Create(transform.position + offset, (int)damageRandom, isCritical);
                     }
                     else
                     {
                         currentHealth -= criticalDamage;
-                        DamagePopup.Create(transform.position, criticalDamage, isCritical);
+                        DamagePopup.Create(transform.position + offset, criticalDamage, isCritical);
                     }   
                     unitAnimator.SetTrigger("Hurt");                    
                     // 적이 죽는다면
