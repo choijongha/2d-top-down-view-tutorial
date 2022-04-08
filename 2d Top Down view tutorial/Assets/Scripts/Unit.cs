@@ -50,6 +50,10 @@ namespace AllUnits
             DamageDelay();
             AttackDelay();
             AttackTotalSpeed();
+            if(currentHealth >= maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
         }
         virtual protected void OnTriggerEnter2D(Collider2D collision)
         {
