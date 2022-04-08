@@ -55,7 +55,8 @@ public class PlayerStatPanel : MonoBehaviour
         if(moveInput.text != "")
         {
             movetext.text = $"Move Speed: {moveInput.text}";
-            playerScript.speed = int.Parse(moveInput.text);
+            playerScript.speed = int.Parse(moveInput.text) + levelDesign.levelUpMove;
+            levelDesign.initialMove = int.Parse(moveInput.text);
         }
     }
     public void ChangeHpValue()
@@ -63,7 +64,8 @@ public class PlayerStatPanel : MonoBehaviour
         if (hpInput.text != "")
         {
             hptext.text = $"Hp : {hpInput.text}";
-            playerScript.maxHealth = int.Parse(hpInput.text);
+            playerScript.maxHealth = int.Parse(hpInput.text) + levelDesign.levelUpMaxHealth;
+            levelDesign.initialMaxHealth = int.Parse(hpInput.text);
         }
     }
     public void ChangeDamageValue()
@@ -71,7 +73,8 @@ public class PlayerStatPanel : MonoBehaviour
         if (damageInput.text != "")
         {
             damagetext.text = $"Damage : {damageInput.text}";
-            playerScript.damage = int.Parse(damageInput.text);
+            playerScript.damage = int.Parse(damageInput.text) + levelDesign.levelUpDamageUp;
+            levelDesign.initialDamageUp = int.Parse(damageInput.text);
         }
     }
     public void ChangeASpeedValue()
@@ -79,7 +82,8 @@ public class PlayerStatPanel : MonoBehaviour
         if (attackSpeedInput.text != "")
         {
             attackSpeedtext.text = $"A/Speed: {attackSpeedInput.text}";
-            playerScript.attackSpeed = int.Parse(attackSpeedInput.text);
+            playerScript.attackSpeed = int.Parse(attackSpeedInput.text) + levelDesign.levelUpAttackSpeed;
+            levelDesign.initialAttackSpeed = int.Parse(attackSpeedInput.text);
         }  
     }
     public void HPFull()

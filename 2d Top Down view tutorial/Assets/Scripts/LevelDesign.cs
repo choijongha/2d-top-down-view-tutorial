@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 public class LevelDesign : MonoBehaviour
@@ -20,10 +18,11 @@ public class LevelDesign : MonoBehaviour
     public int levelUpMaxHealth = 0;
     public int levelUpDamageUp = 0;
     public int levelUpAttackSpeed = 0;
-    private float initialMove = 0;
-    private int initialMaxHealth = 0;
-    private int initialDamageUp = 0;
-    private float initialAttackSpeed = 0;
+
+    [HideInInspector] public float initialMove = 0;
+    [HideInInspector] public int initialMaxHealth = 0;
+    [HideInInspector] public int initialDamageUp = 0;
+    [HideInInspector] public float initialAttackSpeed = 0;
     private void Awake()
     {
         playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
@@ -64,6 +63,7 @@ public class LevelDesign : MonoBehaviour
             levelUpToStatUp();
         }
     }
+    // 초기 능력치
     private void InitialStat()
     {
         initialMove = playerScript.speed;
@@ -71,6 +71,7 @@ public class LevelDesign : MonoBehaviour
         initialDamageUp = playerScript.damage;
         initialAttackSpeed = playerScript.attackSpeed;
     }
+    // 레벨업 시 능력치 추가
     private void levelUpToStatUp()
     {
         levelUpMaxHealth += 10;
@@ -99,7 +100,6 @@ public class LevelDesign : MonoBehaviour
                 levelUpMove += 1;
                 playerScript.speed = initialMove + levelUpMove;
             }
-        }
-        
+        } 
     }
 }
